@@ -4,5 +4,45 @@
   "branch": "main",
   "me": "Ryancmoi",
   "journalStartDate": "2026-01-14T11:57:00.000Z",
-  "exceptions": []
+  "exceptions": [
+    {
+      "id": "e7a45512-a0fe-4068-aa50-d0746d19ab80",
+      "type": "commitpatch",
+      "sha": "8fa47b8feb4b576a761b24784c3440b44522c420",
+      "url": "https://github.com/Ryancmoi/flashcards/commit/8fa47b8feb4b576a761b24784c3440b44522c420",
+      "name": "chore(GitJournal+repo):Ajout et configuration de git journal et du repo github ",
+      "description": "J'ai du créer le repo github puis ajouter les fichiers puis j'ai essayé d'installer gitjournal mais je ne pouvais pas installer le fichier donc je suis allé dans INF-TEAMS_ALL pour prendre gitjornal puis sa n'as pas marché par ce que je n'avais pas généré de token",
+      "date": "2026-01-21T12:09:00.000Z",
+      "duration": 50,
+      "status": "Done",
+      "author": "Ryancmoi",
+      "patch": true
+    },
+    {
+      "id": "f1e87ffe-cfc6-4f53-9db4-0908a3d1f061",
+      "type": "commitpatch",
+      "sha": "83f7ca9ce403fdf4028d74246430d2280bdf0fa3",
+      "url": "https://github.com/Ryancmoi/flashcards/commit/83f7ca9ce403fdf4028d74246430d2280bdf0fa3",
+      "name": "doc(CdC):Ajout dans le dossier .doc et lecture du cahier des charges",
+      "description": "",
+      "date": "2026-01-21T12:10:00.000Z",
+      "duration": 25,
+      "status": "Done",
+      "author": "Ryancmoi",
+      "patch": true
+    },
+    {
+      "id": "7ad3917c-e090-48f4-ab04-fcfd1fca6c39",
+      "type": "commitpatch",
+      "sha": "3f37e33e4d70c9b651ae754c4d9b42828737c2da",
+      "url": "https://github.com/Ryancmoi/flashcards/commit/3f37e33e4d70c9b651ae754c4d9b42828737c2da",
+      "name": "feat(AdonisJS):ajout du dossier app-teachers et d'AdonisJS",
+      "description": "",
+      "date": "2026-01-21T12:43:00.000Z",
+      "duration": 35,
+      "status": "Done",
+      "author": "Ryancmoi",
+      "patch": true
+    }
+  ]
 }
