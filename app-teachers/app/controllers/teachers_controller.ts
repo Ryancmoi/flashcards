@@ -10,7 +10,7 @@ export default class TeachersController {
     // Récupérer la liste des enseignants triés par ordre alphabétique sur le nomet le prénom
     const teachers = await Teacher.query().orderBy('lastname', 'asc').orderBy('firstname', 'asc')
     // Pour obtenir des infos sur la variable teachers
-    dd(teachers)
+    //dd(teachers)
     // Appel de la vue
     return view.render('pages/home', { teachers })
   }
