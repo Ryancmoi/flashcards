@@ -10,8 +10,7 @@
         <label for="user"></label>
         <input type="text" name="user" id="user" placeholder="Login" />
         <label for="password"></label>
-        <input type="password" name="password" id="password" placeholder="Mot de
-passe" />
+        <input type="password" name="password" id="password" placeholder="Mot de passe" />
         <button type="submit" class="btn btn-login">
           Se connecter
  </button>
@@ -20,6 +19,7 @@ passe" />
   </div>
   <nav>
     <a href="{{ route('home') }}">Accueil</a>&nbsp;
- <a href="{{ route('teacher.create') }}">Ajouter un enseignant</a>
+    <a href="{{ route('home') }}">Voir les sections</a>&nbsp;
+ <a href="{{ route('sections') }}">Ajouter un enseignant</a>
   </nav>
 </header>
