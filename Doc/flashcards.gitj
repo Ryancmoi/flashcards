@@ -83,6 +83,49 @@
       "duration": 10,
       "status": "Done",
       "author": "Ryancmoi"
+    },
+    {
+      "id": "000bc2f1-7cf8-4771-8778-537f8cbf8ea5",
+      "type": "commitpatch",
+      "sha": "f9bb8dcfdf3e7a6f4f1e6461fa375ca4f66fda7e",
+      "url": "https://github.com/Ryancmoi/flashcards/commit/f9bb8dcfdf3e7a6f4f1e6461fa375ca4f66fda7e",
+      "name": "feat(page-sections):ajout de la route section",
+      "description": "Cette tache m'as pris moins de temps que ça c'est juste que j'avais une question et le prof était occupé et sans cette réponse je ne pouvais pas avancer",
+      "date": "2026-02-04T13:15",
+      "duration": 45,
+      "status": "Done",
+      "author": "Ryancmoi",
+      "patch": true
+    },
+    {
+      "id": "0a25c49d-37cc-451d-a68d-0b5815341905",
+      "type": "commitless",
+      "name": "explications",
+      "description": "le prof nous as dit qu'il fallait arreter l'app-teachers et qu'il fallait commencer le projet et ce qu'il fallait faire pour le commencer",
+      "date": "2026-02-04T13:00:00.000Z",
+      "duration": 15,
+      "status": "Done",
+      "author": "Ryancmoi"
+    },
+    {
+      "id": "1a09f35c-664f-42da-96ec-6aa975ff3eec",
+      "type": "commitless",
+      "name": "chore(commit):détailler mes commits",
+      "description": "",
+      "date": "2026-02-04T13:20:00.000Z",
+      "duration": 5,
+      "status": "Done",
+      "author": "Ryancmoi"
+    },
+    {
+      "id": "9800b584-3be2-4acf-b379-4bc879bcd42d",
+      "type": "commitless",
+      "name": "theorie",
+      "description": "Le prof a parlé de l'analyse fonctionnelle",
+      "date": "2026-02-04T13:25:00.000Z",
+      "duration": 20,
+      "status": "Done",
+      "author": "Ryancmoi"
     }
   ]
 }
