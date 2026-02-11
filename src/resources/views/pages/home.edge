@@ -5,6 +5,14 @@
       <h2>
         Mes Decks
       </h2>
+      <div>
+        @each (deck in decks)
+          <div>
+            {{ deck.title }}
+          {{ deck.description }}
+          </div>
+        @end
+      </div>
     </section>
   @end
 @end
