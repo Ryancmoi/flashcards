@@ -22,6 +22,9 @@ export default class DecksController {
   async store({ request, response }: HttpContext) {
     const data = request.only(['title', 'description'])
     const existingDeck = await Deck.findBy('title', data.title)
+    if (!data.description || data.description.length < 10) {
+      return response.redirect().toRoute('home')
+    }
     if (existingDeck) {
       return response.redirect().toRoute('home')
     }
