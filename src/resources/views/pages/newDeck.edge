@@ -4,6 +4,23 @@
       <h1>
         Créer un nouveau deck
       </h1>
+
+      <div>
+        <form action="{{ route ('decks.store') }}" method="POST">
+          {{ csrfField() }}
+          <div>
+            <label for="title">Nom du Deck</label>
+            <input type="text" name="title" id="title" required />
+          </div>
+
+          <div>
+            <label for="description">Description</label>
+            <textarea name="description" id="description"></textarea>
+          </div>
+
+          <button type="submit">Créer le deck</button>
+        </form>
+      </div>
     </section>
 
   @end

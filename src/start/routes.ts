@@ -12,3 +12,4 @@ import router from '@adonisjs/core/services/router'
 
 router.get('/', [DecksController, 'index']).as('home')
 router.get('/decks/create', [DecksController, 'create']).as('decks.create')
+router.post('/decks', [DecksController, 'store']).as('decks.store')
