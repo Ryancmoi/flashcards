@@ -21,6 +21,10 @@ export default class DecksController {
    */
   async store({ request, response }: HttpContext) {
     const data = request.only(['title', 'description'])
+    const existingDeck = await Deck.findBy('title', data.title)
+    if (existingDeck) {
+      return response.redirect().toRoute('home')
+    }
     await Deck.create(data)
     return response.redirect().toRoute('home')
   }
