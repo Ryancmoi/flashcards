@@ -12,7 +12,9 @@ export default class DecksController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ view }: HttpContext) {
+    return view.render('pages/newDeck')
+  }
 
   /**
    * Handle form submission for the create action
