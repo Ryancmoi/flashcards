@@ -1,27 +1,126 @@
 @layout('components/layout')
   @slot('main')
-    <section>
-      <h1>
+
+    <section class="form-container">
+      <h1 class="form-title">
         Créer un nouveau deck
       </h1>
 
-      <div>
-        <form action="{{ route ('decks.store') }}" method="POST">
-          {{ csrfField() }}
-          <div>
-            <label for="title">Nom du Deck</label>
-            <input type="text" name="title" id="title" required />
-          </div>
+      <form action="{{ route('decks.store') }}" method="POST">
+        {{ csrfField() }}
+        <div class="form-group">
+          <label for="title">Nom du Deck</label>
+          <input type="text" name="title" id="title" placeholder="Nom" required />
+        </div>
 
-          <div>
-            <label for="description">Description</label>
-            <textarea name="description" id="description"></textarea>
-          </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" placeholder="Description" required></textarea>
+        </div>
 
-          <button type="submit">Créer le deck</button>
-        </form>
-      </div>
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">
+            Créer le deck
+          </button>
+
+          <a href="{{ route('home') }}" class="btn btn-secondary">
+            Abandonner
+          </a>
+        </div>
+      </form>
     </section>
+
+    <style>
+      .form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 32px;
+        background-color: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        font-family: sans-serif;
+      }
+      
+      .form-title {
+        color: #1a202c;
+        margin-bottom: 24px;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+      
+      .form-group {
+        margin-bottom: 20px;
+      }
+      
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #4a5568;
+        font-size: 0.9rem;
+      }
+      
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+      }
+      
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #3182ce;
+        box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+      }
+      
+      .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      
+      .button-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+      }
+      
+      .btn {
+        flex: 1;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+        border: none;
+        text-decoration: none;
+      }
+      
+      .btn-primary {
+        background-color: #3182ce;
+        color: white;
+      }
+      
+      .btn-primary:hover {
+        background-color: #2b6cb0;
+      }
+      
+      .btn-secondary {
+        background-color: #edf2f7;
+        color: #4a5568;
+      }
+      
+      .btn-secondary:hover {
+        background-color: #e2e8f0;
+      }
+    </style>
 
   @end
 @end
