@@ -5,7 +5,7 @@ export default class DecksController {
    * Display a list of resource
    */
   async index({ view }: HttpContext) {
-    const decks = await Deck.query().orderBy('title')
+    const decks = await Deck.query().orderBy('title').preload('cards')
     return view.render('pages/home', { decks })
   }
 

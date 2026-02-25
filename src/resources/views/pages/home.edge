@@ -1,18 +1,95 @@
 @layout('components/layout')
   @slot('main')
-    {{-- Tout ce que tu écris ici sera injecté dans le {{{ await $slots.main() }}} du layout --}}
-    <section>
-      <h2>
+
+    <section class="decks-container">
+      <h2 class="page-title">
         Mes Decks
       </h2>
+
       <div>
         @each (deck in decks)
-          <div>
-            {{ deck.title }}
-          {{ deck.description }}
-          </div>
+          <a href="" class="deck-links">
+            <div class="deck-card">
+
+              <div class="deck-info">
+                <h3>
+                  {{ deck.title }}
+                </h3>
+                <p>
+                  {{ deck.description }}
+                </p>
+              </div>
+
+              <div class="deck-badge">
+                {{ deck.cards.length }} cartes
+              </div>
+            </div>
+            <div>
+              <button>Ajouter un deck</button>
+            </div>
+          </a>
         @end
       </div>
     </section>
+
+    <style>
+      .deck-links {
+        text-decoration: none;
+      }
+      
+      .decks-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        font-family: sans-serif;
+      }
+      
+      .page-title {
+        color: #1a202c;
+        margin-bottom: 24px;
+        font-size: 1.8rem;
+      }
+      
+      .deck-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
+      }
+      
+      .deck-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        cursor: pointer;
+      }
+      
+      .deck-info h3 {
+        margin: 0 0 4px 0;
+        color: #2d3748;
+        font-size: 1.2rem;
+      }
+      
+      .deck-info p {
+        margin: 0;
+        color: #718096;
+        font-size: 0.95rem;
+      }
+      
+      .deck-badge {
+        background-color: #ebf4ff;
+        color: #3182ce;
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: bold;
+        font-size: 0.9rem;
+      }
+    </style>
+
   @end
 @end
