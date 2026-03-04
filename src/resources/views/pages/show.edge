@@ -1,0 +1,20 @@
+@layout('components/layout')
+  @slot('main')
+    <h1>
+      {{ deck.title }}
+    </h1>
+    <p>
+      {{ deck.description }}
+    </p>
+
+    <ul>
+      @each(card in deck.cards)
+        <li>
+          {{ card.question }} ----> {{ card.answer }}
+        </li>
+      @end
+    </ul>
+
+    <a href="{{ route('home') }}">Retour à la liste</a>
+  @end
+@end

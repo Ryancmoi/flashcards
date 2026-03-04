@@ -6,14 +6,14 @@ export default class DecksController {
    */
   async index({ view }: HttpContext) {
     const decks = await Deck.query().orderBy('title').preload('cards')
-    return view.render('pages/home', { decks })
+    return view.render('pages/index', { decks })
   }
 
   /**
    * Display form to create a new record
    */
   async create({ view }: HttpContext) {
-    return view.render('pages/newDeck')
+    return view.render('pages/create')
   }
 
   /**
@@ -35,7 +35,10 @@ export default class DecksController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ params, view }: HttpContext) {
+    const deck = await Deck.query().where('id', params.id).preload('cards').firstOrFail()
+    return view.render('pages/show', { deck })
+  }
 
   /**
    * Edit individual record
