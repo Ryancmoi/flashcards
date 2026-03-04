@@ -43,11 +43,16 @@ export default class DecksController {
 
   /**
    * Edit individual record
+   * Affichage du form
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params, view }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+    return view.render('pages/edit')
+  }
 
   /**
    * Handle form submission for the edit action
+   * Modification des données
    */
   async update({ params, request }: HttpContext) {}
 
