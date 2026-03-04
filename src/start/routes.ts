@@ -17,3 +17,4 @@ router.get('/decks/:id', [DecksController, 'show']).as('decks.show')
 router.delete('/decks/:id', [DecksController, 'destroy']).as('decks.destroy')
 //route permettant d'afficher le form
 router.get('/decks/:id/edit', [DecksController, 'edit']).as('decks.edit')
+router.put('/decks/:id', [DecksController, 'update']).as('decks.update')
