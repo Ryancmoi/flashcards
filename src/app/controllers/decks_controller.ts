@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Deck from '#models/deck'
+import { Session } from '@adonisjs/session'
 export default class DecksController {
   /**
    * Display a list of resource
@@ -53,5 +54,9 @@ export default class DecksController {
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params, response }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+    await deck.delete()
+    return response.redirect().toRoute('home')
+  }
 }

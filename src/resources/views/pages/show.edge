@@ -14,7 +14,14 @@
 
         <div class="deck-actions">
           <a href="" class="btn btn-edit">Modifier</a>
-          <a href="" class="btn btn-delete">Supprimer</a>
+          <form
+            action="{{ route('decks.destroy', { id: deck.id }) }}?_method=DELETE"
+            method="POST"
+            onsubmit="return confirm('Voulez-vous vraiment supprimer ce deck ?')"
+          >
+            {{ csrfField() }}
+            <button type="submit" class="btn btn-delete">Supprimer</button>
+          </form>
         </div>
       </header>
 
@@ -178,6 +185,18 @@
         color: #3182ce;
         text-decoration: none;
         font-weight: 600;
+      }
+      
+      .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #a0aec0;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 2px dashed #e2e8f0;
+        list-style: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
     </style>
   @end

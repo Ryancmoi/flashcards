@@ -1,0 +1,34 @@
+@layout('components/layout')
+  @slot('main')
+
+    <section class="form-container">
+      <h1 class="form-title">
+        Créer un nouveau deck
+      </h1>
+
+      <form action="{{ route('decks.store') }}" method="POST">
+        {{ csrfField() }}
+        <div class="form-group">
+          <label for="title">Nom du Deck</label>
+          <input type="text" name="title" id="title" placeholder="Nom" required />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" placeholder="Description" required></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn btn-primary">
+            Créer le deck
+          </button>
+
+          <a href="{{ route('home') }}" class="btn btn-secondary">
+            Abandonner
+          </a>
+        </div>
+      </form>
+    </section>
+
+  @end
+@end
