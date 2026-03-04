@@ -1,20 +1,184 @@
 @layout('components/layout')
   @slot('main')
-    <h1>
-      {{ deck.title }}
-    </h1>
-    <p>
-      {{ deck.description }}
-    </p>
+    <div class="deck-detail-container">
 
-    <ul>
-      @each(card in deck.cards)
-        <li>
-          {{ card.question }} ----> {{ card.answer }}
-        </li>
-      @end
-    </ul>
+      <header class="deck-header">
+        <div class="deck-title-group">
+          <h1>
+            {{ deck.title }}
+          </h1>
+          <p class="deck-description">
+            {{ deck.description }}
+          </p>
+        </div>
 
-    <a href="{{ route('home') }}">Retour à la liste</a>
+        <div class="deck-actions">
+          <a href="" class="btn btn-edit">Modifier</a>
+          <a href="" class="btn btn-delete">Supprimer</a>
+        </div>
+      </header>
+
+      <section class="cards-section">
+        <div class="section-header">
+          <h2>
+            Cartes ({{ deck.cards.length }})
+          </h2>
+          {{-- Le nouveau bouton Ajouter une carte --}}
+          <a href="" class="btn btn-add-card">+ Ajouter une carte</a>
+        </div>
+
+        <ul class="cards-list">
+          @each(card in deck.cards)
+            <li class="card-row">
+              <div class="card-side question">
+                <span class="label">Question</span>
+                <p>
+                  {{ card.question }}
+                </p>
+              </div>
+              <div class="card-arrow">
+                →
+              </div>
+              <div class="card-side answer">
+                <span class="label">Réponse</span>
+                <p>
+                  {{ card.answer }}
+                </p>
+              </div>
+            </li>
+          @else
+            <li class="empty-state">
+              Ce deck ne contient pas encore de cartes.
+            </li>
+          @end
+        </ul>
+      </section>
+
+      <footer class="deck-footer">
+        <a href="{{ route('home') }}" class="btn-back">← Retour à la liste</a>
+      </footer>
+
+    </div>
+
+    <style>
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      
+      .section-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+      }
+      
+      .btn-add-card {
+        background-color: #48bb78;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 6px rgba(72, 187, 120, 0.2);
+      }
+      
+      .btn-add-card:hover {
+        background-color: #38a169;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(72, 187, 120, 0.3);
+      }
+      
+      .deck-detail-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+        font-family: sans-serif;
+        color: #2d3748;
+      }
+      
+      .deck-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-bottom: 2px solid #edf2f7;
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+      }
+      
+      .deck-actions {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+      
+      .btn-edit {
+        background-color: #669acaff;
+        color: #ffffffff;
+      }
+      
+      .btn-edit:hover {
+        background-color: #237ed3ff;
+        color: #ffffffff;
+      }
+      
+      .btn-delete {
+        background-color: #fff5f5;
+        color: #c53030;
+        border: 1px solid #feb2b2;
+      }
+      
+      .btn-delete:hover {
+        background-color: #c53030;
+        color: white;
+      }
+      
+      .cards-list {
+        list-style: none;
+        padding: 0;
+      }
+      
+      .card-row {
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 12px;
+      }
+      
+      .card-side {
+        flex: 1;
+      }
+      
+      .card-side .label {
+        display: block;
+        font-size: 0.7rem;
+        color: #a0aec0;
+        text-transform: uppercase;
+      }
+      
+      .card-arrow {
+        padding: 0 20px;
+        color: #cbd5e0;
+      }
+      
+      .btn-back {
+        color: #3182ce;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
   @end
 @end
