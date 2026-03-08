@@ -7,6 +7,7 @@
 |
 */
 
+import CardsController from '#controllers/cards_controller'
 import DecksController from '#controllers/decks_controller'
 import router from '@adonisjs/core/services/router'
 
@@ -18,3 +19,5 @@ router.delete('/decks/:id', [DecksController, 'destroy']).as('decks.destroy')
 //route permettant d'afficher le form
 router.get('/decks/:id/edit', [DecksController, 'edit']).as('decks.edit')
 router.put('/decks/:id', [DecksController, 'update']).as('decks.update')
+router.get('decks/:id/cards/create', [CardsController, 'create']).as('cards.create')
+router.post('decks/:id/cards', [CardsController, 'store']).as('cards.store')

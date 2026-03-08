@@ -30,8 +30,7 @@
           <h2>
             Cartes ({{ deck.cards.length }})
           </h2>
-          {{-- Le nouveau bouton Ajouter une carte --}}
-          <a href="" class="btn btn-add-card">+ Ajouter une carte</a>
+          <a href="{{ route('cards.create', { id: deck.id }) }}" class="btn btn-add-card">+ Ajouter une carte</a>
         </div>
 
         <ul class="cards-list">
@@ -78,6 +77,12 @@
       .section-header h2 {
         margin: 0;
         font-size: 1.5rem;
+      }
+      
+      .card-row:hover {
+        cursor: pointer;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
       }
       
       .btn-add-card {

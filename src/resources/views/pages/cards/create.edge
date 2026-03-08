@@ -6,16 +6,16 @@
         Créer une nouvelle carte
       </h1>
 
-      <form action="{{ route('decks.store') }}" method="POST">
+      <form action="{{ route('cards.store', { id: deck.id }) }}" method="POST">
         {{ csrfField() }}
         <div class="form-group">
-          <label for="title">Question</label>
-          <input type="text" name="title" id="title" placeholder="Question" required />
+          <label for="question">Question</label>
+          <input type="text" name="question" id="question" placeholder="Question" required />
         </div>
 
         <div class="form-group">
-          <label for="description">Réponse</label>
-          <textarea name="description" id="description" placeholder="Réponse" required></textarea>
+          <label for="answer">Réponse</label>
+          <textarea name="answer" id="answer" placeholder="Réponse" required></textarea>
         </div>
 
         <div class="button-group">
@@ -23,7 +23,7 @@
             Créer la carte
           </button>
 
-          <a href="{{ route('home') }}" class="btn btn-secondary">
+          <a href="{{ route('decks.show', { id: deck.id}) }}" class="btn btn-secondary">
             Abandonner
           </a>
         </div>

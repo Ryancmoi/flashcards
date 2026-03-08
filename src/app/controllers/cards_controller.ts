@@ -18,7 +18,16 @@ export default class CardsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, response, params }: HttpContext) {
+    //trouver le deck parent
+    const deck = await Deck.findOrFail(params.id)
+    //filtrer les données
+    const data = request.only(['question', 'answer'])
+    //inserer dans la database
+    await deck.related('cards').create(data)
+    //rediriger
+    return response.redirect().toRoute('decks.show', { id: deck.id })
+  }
 
   /**
    * Show individual record
