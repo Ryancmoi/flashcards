@@ -1,3 +1,4 @@
+import Card from '#models/card'
 import Deck from '#models/deck'
 import type { HttpContext } from '@adonisjs/core/http'
 
@@ -21,11 +22,26 @@ export default class CardsController {
   async store({ request, response, params }: HttpContext) {
     //trouver le deck parent
     const deck = await Deck.findOrFail(params.id)
-    //filtrer les données
     const data = request.only(['question', 'answer'])
-    //inserer dans la database
+
+    //verifications question > 10, reponse pas vide
+    if (!data.question || data.question.length < 10) {
+      return response.redirect().toRoute('decks.show', { id: deck.id })
+    }
+
+    //verif anti doublon
+    const existingCard = await deck
+      .related('cards')
+      .query()
+      .where('question', data.question)
+      .first()
+    if (existingCard) {
+      return response.redirect().toRoute('decks.show', { id: deck.id })
+    }
+
+    //si tout est bon création de la carte
     await deck.related('cards').create(data)
-    //rediriger
+
     return response.redirect().toRoute('decks.show', { id: deck.id })
   }
 
