@@ -54,7 +54,16 @@ export default class CardsController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ params, view }: HttpContext) {
+    //trouver le deck
+    const deck = await Deck.findOrFail(params.deck_id)
+
+    //chercher la carte avec son id
+    const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
+
+    //enoyer le deck et la carte
+    return view.render('pages/cards/show', { card })
+  }
 
   /**
    * Edit individual record
