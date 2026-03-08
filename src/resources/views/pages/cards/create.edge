@@ -6,6 +6,12 @@
         Créer une nouvelle carte
       </h1>
 
+      @if(flashMessages.has('error'))
+        <div class="alert-error">
+          {{ flashMessages.get('error') }}
+        </div>
+      @end
+      
       <form action="{{ route('cards.store', { id: deck.id }) }}" method="POST">
         {{ csrfField() }}
         <div class="form-group">
@@ -31,6 +37,16 @@
     </section>
 
     <style>
+      .alert-error {
+        background-color: #fed7d7;
+        color: #c53030;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 600;
+      }
+      
       .form-container {
         max-width: 600px;
         margin: 50px auto;

@@ -19,14 +19,18 @@ export default class CardsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response, params }: HttpContext) {
+  async store({ request, response, params, session }: HttpContext) {
     //trouver le deck parent
     const deck = await Deck.findOrFail(params.id)
     const data = request.only(['question', 'answer'])
 
     //verifications question > 10, reponse pas vide
-    if (!data.question || data.question.length < 10) {
-      return response.redirect().toRoute('decks.show', { id: deck.id })
+    if (!data.question || data.question.length < 10 || !data.answer) {
+      session.flash(
+        'error',
+        'La question doit faire au moins 10 caractères et la réponse est obligatoire.'
+      )
+      return response.redirect().back()
     }
 
     //verif anti doublon
@@ -35,8 +39,10 @@ export default class CardsController {
       .query()
       .where('question', data.question)
       .first()
+
     if (existingCard) {
-      return response.redirect().toRoute('decks.show', { id: deck.id })
+      session.flash('error', 'Cette question existe déjà dans ce deck.')
+      return response.redirect().back()
     }
 
     //si tout est bon création de la carte
