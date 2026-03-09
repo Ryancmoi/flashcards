@@ -27,3 +27,6 @@ router.post('decks/:id/cards', [CardsController, 'store']).as('cards.store')
 
 //afficher une carte
 router.get('decks/:deck_id/cards/:id', [CardsController, 'show']).as('cards.show')
+
+//supprimer une carte
+router.delete('/decks/:deck_id/cards/:id', [CardsController, 'destroy']).as('cards.destroy')

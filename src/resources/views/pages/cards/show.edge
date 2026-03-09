@@ -25,6 +25,16 @@
     <div>
       <a href="{{ route('decks.show', { id: deck.id}) }}">OK</a>
     </div>
+    <div class="card-actions">
+      <form
+        action="{{ route('cards.destroy', { deck_id: deck.id, id: card.id }) }}?_method=DELETE"
+        method="POST"
+        onsubmit="return confirm('Voulez-vous vraiment supprimer cette carte ?')"
+      >
+        {{ csrfField() }}
+            <button type="submit" class="btn btn-delete">Supprimer</button>
+      </form>
+    </div>
 
     <script>
       function flipCard() {
