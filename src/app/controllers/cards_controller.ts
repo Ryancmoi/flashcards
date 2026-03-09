@@ -62,7 +62,7 @@ export default class CardsController {
     const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
 
     //enoyer le deck et la carte
-    return view.render('pages/cards/show', { card })
+    return view.render('pages/cards/show', { card, deck })
   }
 
   /**
