@@ -68,12 +68,24 @@ export default class CardsController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params, view }: HttpContext) {
+    //SELECT * FROM decks WHERE id = 5 LIMIT 1;
+    const deck = await Deck.findOrFail(params.deck_id)
+    const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
+    return view.render('pages/cards/edit', { card, deck })
+  }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request, response }: HttpContext) {
+    const deck = await Deck.findOrFail(params.deck_id)
+    const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
+    const data = request.only(['question', 'answer'])
+    card.merge(data)
+    await card.save()
+    return response.redirect().toRoute('decks.show', { id: deck.id })
+  }
 
   /**
    * Delete record

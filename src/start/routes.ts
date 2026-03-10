@@ -30,3 +30,7 @@ router.get('decks/:deck_id/cards/:id', [CardsController, 'show']).as('cards.show
 
 //supprimer une carte
 router.delete('/decks/:deck_id/cards/:id', [CardsController, 'destroy']).as('cards.destroy')
+
+//modifier une carte
+router.get('/deck/:deck_id/cards/:id', [CardsController, 'edit']).as('cards.edit')
+router.put('/decks/:deck_id/cards/:id', [CardsController, 'update']).as('cards.update')
