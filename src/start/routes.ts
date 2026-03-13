@@ -9,6 +9,7 @@
 
 import CardsController from '#controllers/cards_controller'
 import DecksController from '#controllers/decks_controller'
+import PlayController from '#controllers/plays_controller'
 import router from '@adonisjs/core/services/router'
 
 router.get('/', [DecksController, 'index']).as('home')
@@ -34,3 +35,13 @@ router.delete('/decks/:deck_id/cards/:id', [CardsController, 'destroy']).as('car
 //modifier une carte
 router.get('/deck/:deck_id/cards/:id', [CardsController, 'edit']).as('cards.edit')
 router.put('/decks/:deck_id/cards/:id', [CardsController, 'update']).as('cards.update')
+
+//routes pour jouer
+//page de départ
+router.get('/decks/:id/play/start', [PlayController, 'start']).as('play.start')
+
+//page de finish
+router.get('/decks/:id/play/finish', [PlayController, 'finish']).as('play.finish')
+
+//page pour afficher une carte avec son index et son score en parametre
+router.get('/decks/:id/play/:index', [PlayController, 'card']).as('play.card')
