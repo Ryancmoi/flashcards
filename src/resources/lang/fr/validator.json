@@ -1,0 +1,14 @@
+{
+  "shared": {
+    "fields": {
+      "title": "Titre",
+      "description": "Description",
+      "question": "Question",
+      "answer": "Réponse"
+    },
+    "messages": {
+      "required": "Il faut donner une {field}",
+      "minLength": "{field} trop courte (<{min} caractères)"
+    }
+  }
+}

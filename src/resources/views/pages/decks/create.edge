@@ -3,34 +3,47 @@
 
     <section class="form-container">
       <h1 class="form-title">
-        Créer un nouveau deck
+        Nouveau Deck
       </h1>
 
       <form action="{{ route('decks.store') }}" method="POST">
         {{ csrfField() }}
         <div class="form-group">
-          <label for="title">Nom du Deck</label>
-          <input type="text" name="title" id="title" placeholder="Nom" required />
+          <label for="title">Titre</label>
+          <input type="text" name="title" id="title" value="{{ old('title') || '' }}" />
+
+          @inputError('title')
+            <p class="text-danger">
+              {{ $messages.join(', ') }}
+            </p>
+          @end
         </div>
 
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea name="description" id="description" placeholder="Description" required></textarea>
+          <textarea name="description" id="description">{{ old('description') || '' }}</textarea>
+
+          @inputError('description')
+            <p class="text-danger">
+              {{ $messages.join(', ') }}
+            </p>
+          @end
         </div>
 
         <div class="button-group">
-          <button type="submit" class="btn btn-primary">
-            Créer le deck
-          </button>
-
-          <a href="{{ route('home') }}" class="btn btn-secondary">
-            Abandonner
-          </a>
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+          <a href="{{ route('home') }}" class="btn btn-secondary">Abandonner</a>
         </div>
       </form>
     </section>
 
     <style>
+      .text-danger {
+        color: red;
+        font-size: 0.9rem;
+        margin-top: 5px;
+      }
+      
       .form-container {
         max-width: 600px;
         margin: 50px auto;

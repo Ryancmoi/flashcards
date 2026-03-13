@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Deck from '#models/deck'
 import { Session } from '@adonisjs/session'
+import { DeckValidator } from '#validators/deck'
 export default class DecksController {
   /**
    * Display a list of resource
@@ -20,16 +21,19 @@ export default class DecksController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response }: HttpContext) {
-    const data = request.only(['title', 'description'])
+  async store({ request, session, response }: HttpContext) {
+    const data = await request.validateUsing(DeckValidator)
+
     const existingDeck = await Deck.findBy('title', data.title)
-    if (!data.description || data.description.length < 10) {
-      return response.redirect().toRoute('home')
-    }
     if (existingDeck) {
-      return response.redirect().toRoute('home')
+      session.flash({
+        title: ['Ce deck existe déjà'],
+      })
+      return response.redirect().back()
     }
+
     await Deck.create(data)
+
     return response.redirect().toRoute('home')
   }
 
@@ -54,12 +58,27 @@ export default class DecksController {
    * Handle form submission for the edit action
    * Modification des données
    */
-  async update({ params, request, response }: HttpContext) {
+  async update({ params, request, session, response }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
-    const data = request.only(['title', 'description'])
+
+    const data = await request.validateUsing(DeckValidator)
+
+    const existingDeck = await Deck.query()
+      .where('title', data.title)
+      .whereNot('id', deck.id)
+      .first()
+
+    if (existingDeck) {
+      session.flash({
+        title: ['Ce deck existe déjà'],
+      })
+      return response.redirect().back()
+    }
+
     deck.merge(data)
     await deck.save()
-    return response.redirect().toRoute('home')
+
+    return response.redirect().toRoute('decks.show', { id: deck.id })
   }
 
   /**
