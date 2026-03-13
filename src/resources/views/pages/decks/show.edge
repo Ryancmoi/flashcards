@@ -12,6 +12,9 @@
           </p>
         </div>
 
+        <a href="{{ route('play.start', { id: deck.id }) }}" class="btn btn-primary">
+          Exercer
+        </a>
         <div class="deck-actions">
           <a href="{{ route('decks.edit', { id: deck.id }) }}" class="btn btn-edit">Modifier</a>
           <form
@@ -73,6 +76,32 @@
     </div>
 
     <style>
+      .btn-primary {
+        background-color: #3182ce;
+        color: white;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px rgba(49, 130, 206, 0.2);
+      }
+      
+      .btn-primary:hover {
+        background-color: #2b6cb0;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px rgba(49, 130, 206, 0.3);
+        color: white;
+      }
+      
+      .deck-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #edf2f7;
+        padding-bottom: 24px;
+        margin-bottom: 32px;
+      }
+      
       .section-header {
         display: flex;
         justify-content: space-between;
