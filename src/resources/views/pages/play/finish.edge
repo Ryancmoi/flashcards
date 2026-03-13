@@ -1,0 +1,46 @@
+@layout('components/layout')
+  @slot('main')
+    <div class="play-container">
+      <h2>
+        Vous avez exercé le deck
+      </h2>
+      <h1>
+        {{ deck.title }}
+      </h1>
+
+      <p style="margin: 20px 0; font-size: 1.1rem;">
+        en mode basique
+      </p>
+
+      <h3 style="margin: 30px 0;">
+        Votre résultat: {{ score }}/{{ total }}
+      </h3>
+
+      <a href="{{ route('home') }}" class="btn btn-start">
+        OK
+      </a>
+    </div>
+
+    <style>
+      .play-container {
+        text-align: center;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 40px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: white;
+      }
+      
+      .btn-start {
+        display: inline-block;
+        padding: 10px 30px;
+        border: 1px solid #ccc;
+        background: white;
+        color: black;
+        text-decoration: none;
+        border-radius: 6px;
+      }
+    </style>
+  @end
+@end
