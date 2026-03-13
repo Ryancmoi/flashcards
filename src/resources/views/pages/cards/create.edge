@@ -6,24 +6,28 @@
         Créer une nouvelle carte
       </h1>
 
-      @if(flashMessages.has('error'))
-        <div class="alert-error">
-          {{ flashMessages.get('error') }}
-        </div>
-      @end
-      
       <form action="{{ route('cards.store', { id: deck.id }) }}" method="POST">
         {{ csrfField() }}
         <div class="form-group">
           <label for="question">Question</label>
           <input type="text" name="question" id="question" placeholder="Question" required />
         </div>
-
+        @inputError('title')
+          <p class="text-danger" style="color: red; font-size: 0.9rem; margin-top: 5px;">
+            {{ $messages.join(', ') }}
+          </p>
+        @end
+        
         <div class="form-group">
           <label for="answer">Réponse</label>
           <textarea name="answer" id="answer" placeholder="Réponse"></textarea>
         </div>
-
+        @inputError('description')
+          <p class="text-danger" style="color: red; font-size: 0.9rem; margin-top: 5px;">
+            {{ $messages.join(', ') }}
+          </p>
+        @end
+        
         <div class="button-group">
           <button type="submit" class="btn btn-primary">
             Créer la carte

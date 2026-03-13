@@ -33,6 +33,7 @@ export default class DecksController {
     }
 
     await Deck.create(data)
+    session.flash('success', 'Le deck a été créé avec succès !')
 
     return response.redirect().toRoute('home')
   }
@@ -78,15 +79,18 @@ export default class DecksController {
     deck.merge(data)
     await deck.save()
 
+    session.flash('success', 'Le deck a été modifié avec succès !')
+
     return response.redirect().toRoute('decks.show', { id: deck.id })
   }
 
   /**
    * Delete record
    */
-  async destroy({ params, response }: HttpContext) {
+  async destroy({ params, response, session }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
     await deck.delete()
+    session.flash('success', 'Le deck a été supprimé avec succès !')
     return response.redirect().toRoute('home')
   }
 }

@@ -24,15 +24,6 @@ export default class CardsController {
     const deck = await Deck.findOrFail(params.id)
     const data = request.only(['question', 'answer'])
 
-    //verifications question > 10, reponse pas vide
-    if (!data.question || data.question.length < 10 || !data.answer) {
-      session.flash(
-        'error',
-        'La question doit faire au moins 10 caractères et la réponse est obligatoire.'
-      )
-      return response.redirect().back()
-    }
-
     //verif anti doublon
     const existingCard = await deck
       .related('cards')
@@ -47,7 +38,7 @@ export default class CardsController {
 
     //si tout est bon création de la carte
     await deck.related('cards').create(data)
-
+    session.flash('success', 'La carte a été créée avec succès !')
     return response.redirect().toRoute('decks.show', { id: deck.id })
   }
 
@@ -78,22 +69,24 @@ export default class CardsController {
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request, response }: HttpContext) {
+  async update({ params, request, response, session }: HttpContext) {
     const deck = await Deck.findOrFail(params.deck_id)
     const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
     const data = request.only(['question', 'answer'])
     card.merge(data)
     await card.save()
+    session.flash('success', 'La carte a été modifiée avec succès !')
     return response.redirect().toRoute('decks.show', { id: deck.id })
   }
 
   /**
    * Delete record
    */
-  async destroy({ params, response }: HttpContext) {
+  async destroy({ params, response, session }: HttpContext) {
     const deck = await Deck.findOrFail(params.deck_id)
     const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
     await card.delete()
+    session.flash('success', 'La carte a été supprimée avec succès !')
     return response.redirect().toRoute('decks.show', { id: deck.id })
   }
 }
