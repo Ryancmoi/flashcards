@@ -13,14 +13,32 @@
         {{ csrfField() }}
         <div class="form-group">
           <label for="question">Question</label>
-          <input type="text" name="question" id="question" value="{{ card.question }}" required />
+          <input type="text" name="question" id="question" value="{{ old('question') || card.question || '' }}" />
         </div>
 
+        @inputError('question')
+          <p class="text-danger">
+            {{ $messages.join(', ') }}
+          </p>
+        @end
+        
+        @if(flashMessages.has('erreur_doublon'))
+          <p class="text-danger">
+            {{ flashMessages.get('erreur_doublon') }}
+          </p>
+        @end
+        
         <div class="form-group">
           <label for="answer">Réponse</label>
-          <textarea name="answer" id="answer" required>{{ card.answer }}</textarea>
+          <textarea name="answer" id="answer">{{ old('answer') || card.answer || '' }}</textarea>
         </div>
 
+        @inputError('answer')
+          <p class="text-danger">
+            {{ $messages.join(', ') }}
+          </p>
+        @end
+        
         <div class="button-group">
           <button type="submit" class="btn btn-primary">
             Enregistrer les modifications
@@ -34,6 +52,12 @@
     </section>
 
     <style>
+      .text-danger {
+        color: red;
+        font-size: 0.9rem;
+        margin-top: 5px;
+      }
+      
       .form-container {
         max-width: 600px;
         margin: 50px auto;

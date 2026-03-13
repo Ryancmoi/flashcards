@@ -1,5 +1,6 @@
 import Card from '#models/card'
 import Deck from '#models/deck'
+import { CardValidator } from '#validators/card'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class CardsController {
@@ -20,24 +21,28 @@ export default class CardsController {
    * Handle form submission for the create action
    */
   async store({ request, response, params, session }: HttpContext) {
-    //trouver le deck parent
     const deck = await Deck.findOrFail(params.id)
-    const data = request.only(['question', 'answer'])
 
-    //verif anti doublon
+    const selectedQuery = request.input('question')
     const existingCard = await deck
       .related('cards')
       .query()
-      .where('question', data.question)
+      .where('question', selectedQuery)
       .first()
 
     if (existingCard) {
-      session.flash('error', 'Cette question existe déjà dans ce deck.')
+      session.flash('erreur_doublon', 'Cette question existe déjà dans ce deck.')
+    }
+
+    const data = await request.validateUsing(CardValidator)
+
+    if (existingCard) {
+      session.flashAll()
       return response.redirect().back()
     }
 
-    //si tout est bon création de la carte
     await deck.related('cards').create(data)
+
     session.flash('success', 'La carte a été créée avec succès !')
     return response.redirect().toRoute('decks.show', { id: deck.id })
   }
@@ -70,13 +75,34 @@ export default class CardsController {
    * Handle form submission for the edit action
    */
   async update({ params, request, response, session }: HttpContext) {
+    const card = await Card.findOrFail(params.id)
     const deck = await Deck.findOrFail(params.deck_id)
-    const card = await deck.related('cards').query().where('id', params.id).firstOrFail()
-    const data = request.only(['question', 'answer'])
+
+    const selectedQuery = request.input('question')
+
+    const existingCard = await deck
+      .related('cards')
+      .query()
+      .where('question', selectedQuery)
+      .whereNot('id', card.id)
+      .first()
+
+    if (existingCard) {
+      session.flash('erreur_doublon', 'Cette question existe déjà dans ce deck.')
+    }
+
+    const data = await request.validateUsing(CardValidator)
+
+    if (existingCard) {
+      session.flashAll()
+      return response.redirect().back()
+    }
+
     card.merge(data)
     await card.save()
+
     session.flash('success', 'La carte a été modifiée avec succès !')
-    return response.redirect().toRoute('decks.show', { id: deck.id })
+    return response.redirect().toRoute('decks.show', { id: params.deck_id })
   }
 
   /**

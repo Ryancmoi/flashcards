@@ -13,6 +13,12 @@
           <input type="text" name="title" id="title" value="{{ deck.title }}" required />
         </div>
 
+        @inputError('title')
+          <p style="color: #c53030; font-size: 0.9rem; margin-top: 5px;">
+            {{ $messages.join(', ') }}
+          </p>
+        @end
+        
         <div class="form-group">
           <label for="description">Description</label>
           <textarea name="description" id="description" required>{{ deck.description }}</textarea>

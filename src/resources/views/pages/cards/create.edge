@@ -10,20 +10,32 @@
         {{ csrfField() }}
         <div class="form-group">
           <label for="question">Question</label>
-          <input type="text" name="question" id="question" placeholder="Question" required />
+          <input
+            type="text"
+            name="question"
+            id="question"
+            placeholder="Question"
+            value="{{ old('question') || '' }}"
+          />
         </div>
-        @inputError('title')
-          <p class="text-danger" style="color: red; font-size: 0.9rem; margin-top: 5px;">
+        @inputError('question')
+          <p class="text-danger">
             {{ $messages.join(', ') }}
+          </p>
+        @end
+        
+        @if(flashMessages.has('erreur_doublon'))
+          <p class="text-danger">
+            {{ flashMessages.get('erreur_doublon') }}
           </p>
         @end
         
         <div class="form-group">
           <label for="answer">Réponse</label>
-          <textarea name="answer" id="answer" placeholder="Réponse"></textarea>
+          <textarea name="answer" id="answer" placeholder="Réponse">{{ old('answer') || '' }}</textarea>
         </div>
-        @inputError('description')
-          <p class="text-danger" style="color: red; font-size: 0.9rem; margin-top: 5px;">
+        @inputError('answer')
+          <p class="text-danger">
             {{ $messages.join(', ') }}
           </p>
         @end
@@ -41,14 +53,10 @@
     </section>
 
     <style>
-      .alert-error {
-        background-color: #fed7d7;
-        color: #c53030;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: 600;
+      .text-danger {
+        color: red;
+        font-size: 0.9rem;
+        margin-top: 5px;
       }
       
       .form-container {

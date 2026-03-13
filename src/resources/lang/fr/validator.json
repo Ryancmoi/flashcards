@@ -7,7 +7,7 @@
       "answer": "Réponse"
     },
     "messages": {
-      "required": "Il faut donner une {field}",
+      "required": "Il faut donner un {field}",
       "minLength": "{field} trop courte (<{min} caractères)"
     }
   }
