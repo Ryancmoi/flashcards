@@ -21,20 +21,25 @@ export default class DecksController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request, session, response }: HttpContext) {
+  async store({ request, response, session }: HttpContext) {
+    const userTitle = request.input('title')
+
+    const existingDeck = await Deck.query().where('title', userTitle).first()
+
+    if (existingDeck) {
+      session.flash('erreur_doublon', 'Ce deck existe déjà')
+    }
+
     const data = await request.validateUsing(DeckValidator)
 
-    const existingDeck = await Deck.findBy('title', data.title)
     if (existingDeck) {
-      session.flash({
-        title: ['Ce deck existe déjà'],
-      })
+      session.flashAll()
       return response.redirect().back()
     }
 
     await Deck.create(data)
-    session.flash('success', 'Le deck a été créé avec succès !')
 
+    session.flash('success', 'Le deck a été créé avec succès !')
     return response.redirect().toRoute('home')
   }
 

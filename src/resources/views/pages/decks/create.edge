@@ -12,9 +12,9 @@
           <label for="title">Titre</label>
           <input type="text" name="title" id="title" value="{{ old('title') || '' }}" />
 
-          @inputError('title')
+          @if(flashMessages.has('erreur_doublon'))
             <p class="text-danger">
-              {{ $messages.join(', ') }}
+              {{ flashMessages.get('erreur_doublon') }}
             </p>
           @end
         </div>
